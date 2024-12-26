@@ -1,0 +1,88 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>FlinkApp</groupId>
+  <artifactId>com.example.Flink</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>FlinkApplication</name>
+  <description>Flink Application</description>
+  
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <httpclient.version>3.1</httpclient.version>
+        <kafka.version>3.3.1</kafka.version>
+        <gson.version>2.11.0</gson.version>
+        <cache.version>1.1.1</cache.version>
+        <flink.version>1.19.1</flink.version>
+        <hazelcast.version>5.2.0</hazelcast.version>
+        <javassist.version>3.29.2-GA</javassist.version>
+        <caffeine.version>3.1.8</caffeine.version>
+        <org.modelmapper.version>3.2.0</org.modelmapper.version>
+        <dozer.version>5.5.1</dozer.version>
+        <javatuples.version>1.2</javatuples.version>
+        <flink-connector-kafka.version>1.17.2</flink-connector-kafka.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    </properties>
+  
+  <dependencies>
+  		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-core</artifactId>
+			<version>${flink.version}</version>
+			<exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		
+		 <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka</artifactId>
+            <version>${flink-connector-kafka.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+		
+	
+
+		<!-- https://mvnrepository.com/artifact/org.apache.flink/flink-streaming-java -->
+		<dependency>
+			<groupId>org.apache.flink</groupId>
+			<artifactId>flink-java</artifactId>
+			<version>${flink.version}</version>
+			<exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+	</dependencies>
+	
+	   <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>
+                        --add-opens java.base/java.nio=ALL-UNNAMED
+                        --add-opens java.base/java.lang=ALL-UNNAMED
+                        --add-opens java.base/java.util=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
